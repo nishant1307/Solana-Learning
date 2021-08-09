@@ -1,0 +1,10 @@
+Wormhole is the first of many such cross-chain bridges to come. It uses decentralized cross-chain oracles — called guardians — operated by a set of node operators that include top Solana validators and other ecosystem stakeholders whose incentives are strongly aligned with Solana and Serum.
+Those guardians certify token lockups and burns on one chain in order to mint new tokens or release tokens on the other, and vice versa.
+
+How does Wormhole work?
+Wormhole is not a blockchain network — it doesn’t have to, instead, it can safely rely on consensus and finalization of the chains that it bridges.
+It is leaderless — all guardians perform the same computation upon observing an on-chain event, and sign a so-called Validator Action Approval (VAA). If a 2/3+ majority of all guardian nodes have observed and signed the same event using their individual keys, then it is automatically considered valid by all Wormhole contracts on all chains and triggers a mint/burn.
+All guardians have equal weight — there’s no Wormhole staking token. With Wormhole being closely coupled to Solana, a PoA network that “borrows” identities and trust from the main chain is much less complicated.
+
+Consensus is established asynchronously using a gossip network. Once a VAA has been signed by a sufficient number of nodes, it is posted to the Solana chain for data availability. It is then either immediately executed, or, for VAAs to be executed on Ethereum, retrieved by the user who triggered the transaction and submitted to Ethereum — and the fee paid for — by themselves (this happens transparently when using the Wormhole wallet). The fee for Solana transactions is paid for by the requestor by paying a slightly higher rent on the account that is created when requesting a token lock or burn.
+VAAs are always generated in response to an on-chain event. The only exception are guardian set changes — nodes can agree on a new guardian set by submitting a special VAA that specifies the new guardian set, which has been established by an off-chain governance mechanism.
